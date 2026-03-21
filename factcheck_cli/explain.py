@@ -6,6 +6,7 @@ import ollama
 from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
+
 MODEL = "qwen3:8b"
 console = Console()
 
@@ -18,7 +19,6 @@ SYSTEM_PROMPT = (
 
 
 def stream_response(messages: list) -> str:
-    """メッセージ履歴を渡してストリーミング出力し、応答全文を返す。"""
     stream = ollama.chat(
         model=MODEL,
         messages=messages,
@@ -102,12 +102,7 @@ def stream_explain(query: str) -> None:
         sys.exit(1)
 
 
-@click.group()
-def main():
-    """factcheck-cli: ターミナルコマンド解説と論文ファクトチェックのCLIツール"""
-
-
-@main.command()
+@click.command()
 @click.argument("query", nargs=-1)
 def explain(query):
     """シェルコマンドを日本語で解説します。
@@ -131,7 +126,3 @@ def explain(query):
         )
 
     stream_explain(q)
-
-
-if __name__ == "__main__":
-    main()
