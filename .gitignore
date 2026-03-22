@@ -10,3 +10,9 @@ wheels/
 .venv
 
 CLAUDE.md
+
+# illum output directory
+refs/
+
+# Claude Code local settings
+.claude/
